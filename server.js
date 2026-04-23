@@ -4,6 +4,7 @@
 
 const express = require('express');
 const path = require("path");
+const mongoose = require('mongoose');
 
 const legoData = require("./modules/legoSets");
 const authData = require("./modules/auth-service");
@@ -13,13 +14,18 @@ const app = express();
 
 const HTTP_PORT = process.env.PORT || 8080;
 
-// Middleware
+/* -------------------- DATABASE CONNECTION -------------------- */
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log("MongoDB connected successfully"))
+  .catch(err => console.log("MongoDB connection error:", err));
+
+/* -------------------- MIDDLEWARE -------------------- */
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(clientSessions({
   cookieName: 'session',
-  secret: 'random_secret_string',
+  secret: process.env.SESSION_SECRET || 'random_secret_string',
   duration: 24 * 60 * 60 * 1000,
   activeDuration: 1000 * 60 * 5
 }));
@@ -31,11 +37,14 @@ app.use((req, res, next) => {
 
 app.set('view engine', 'ejs');
 
-// Routes
+/* -------------------- ROUTES -------------------- */
+
+// Home & About
 app.get("/", (req, res) => res.render("home"));
 app.get("/about", (req, res) => res.render("about"));
 
-// LEGO routes
+/* -------------------- LEGO ROUTES -------------------- */
+
 app.get("/lego/sets/", async (req, res) => {
   try {
     const theme = req.query.theme;
@@ -71,7 +80,8 @@ app.get("/lego/sets/:num", async (req, res) => {
   }
 });
 
-// Add Set
+/* -------------------- ADD SET -------------------- */
+
 app.get('/lego/addSet', async (req, res) => {
   try {
     const themes = await legoData.getAllThemes();
@@ -90,7 +100,8 @@ app.post('/lego/addSet', async (req, res) => {
   }
 });
 
-// Edit Set
+/* -------------------- EDIT SET -------------------- */
+
 app.get('/lego/editSet/:num', async (req, res) => {
   try {
     const set = await legoData.getSetByNum(req.params.num);
@@ -110,7 +121,8 @@ app.post('/lego/editSet', async (req, res) => {
   }
 });
 
-// Delete Set
+/* -------------------- DELETE SET -------------------- */
+
 app.get('/lego/deleteSet/:num', async (req, res) => {
   try {
     await legoData.deleteSet(req.params.num);
@@ -120,7 +132,8 @@ app.get('/lego/deleteSet/:num', async (req, res) => {
   }
 });
 
-// Auth routes
+/* -------------------- AUTH ROUTES -------------------- */
+
 app.get('/login', (req, res) => {
   res.render('login', { errorMessage: null });
 });
@@ -132,7 +145,7 @@ app.get('/register', (req, res) => {
 app.post('/register', async (req, res) => {
   try {
     await authData.registerUser(req.body);
-    res.render('register', { successMessage: "User created" });
+    res.render('register', { successMessage: "User created successfully" });
   } catch (error) {
     res.render('register', { errorMessage: error });
   }
@@ -161,7 +174,8 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-// Login check middleware
+/* -------------------- AUTH MIDDLEWARE -------------------- */
+
 function ensureLogin(req, res, next) {
   if (req.session && req.session.user) {
     return next();
@@ -173,16 +187,18 @@ app.get("/userHistory", ensureLogin, (req, res) => {
   res.render("userHistory");
 });
 
-// 404
+/* -------------------- 404 HANDLER -------------------- */
+
 app.use((req, res) => {
   res.status(404).render("404", {
     message: "Page not found"
   });
 });
 
-// START SERVER (IMPORTANT FIX)
+/* -------------------- START SERVER -------------------- */
+
 app.listen(HTTP_PORT, () => {
-  console.log(`Server running: http://localhost:${HTTP_PORT}`);
+  console.log(`Server running on port ${HTTP_PORT}`);
 });
 
 module.exports = app;
