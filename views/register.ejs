@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    /* Styles for the container */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f8f8f8; /* Light gray background */
+    }
+
+    /* Styles for the card */
+    .card {
+      max-width: 400px;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
+      background-color: #fff; /* White background */
+    }
+
+    /* Styles for the card title */
+    .card h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #333; /* Dark gray color */
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Styles for form controls */
+    .form-control {
+      margin-bottom: 20px;
+    }
+
+    /* Styles for labels */
+    .label-text {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #555; /* Gray color */
+    }
+
+    /* Styles for input fields */
+    .input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      color: #333; /* Dark gray color */
+      background-color: #f8f8f8; /* Light gray background */
+    }
+
+    /* Styles for the submit button */
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4caf50; /* Green color */
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Styles for the submit button on hover */
+    .btn:hover {
+      background-color: red; /* Darker green on hover */
+    }
+
+    /* Styles for alerts */
+    .alert {
+      padding: 15px;
+      background-color: #d1f436; /* Red color */
+      color: #fff;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* Styles for success message */
+    .success-message {
+      color: #7a4caf; /* Green color */
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <% include('partials/navbar', { page: 'register' }) %>
+  
+  <div class="container mx-auto">
+    <div class="max-w-md mx-auto mt-6">
+      <% if(typeof successMessage !== 'undefined') { %>
+        <div class="success-message">
+          <span><%= successMessage %></span>
+        </div>
+        <a href="/login" class="btn">Proceed to Log in</a>
+      <% } else { %>
+        <form action="/register" method="POST" class="card shadow-md p-6">
+          <h2 class="text-2xl font-semibold mb-4">Register</h2>
+          <% if(typeof errorMessage !== 'undefined') { %>
+            <div class="alert">
+              <span><%= errorMessage %></span>
+            </div>
+          <% } %>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">User Name</span>
+            </label>
+            <input type="text" name="userName" placeholder="User Name" required class="input">
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Password</span>
+            </label>
+            <input type="password" name="password" placeholder="Password" required class="input">
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Confirm Password</span>
+            </label>
+            <input type="password" name="password2" placeholder="Confirm Password" required class="input">
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Email Address</span>
+            </label>
+            <input type="email" name="email" placeholder="Email Address" required class="input">
+          </div>
+          <button type="submit" class="btn">Register</button>
+        </form>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

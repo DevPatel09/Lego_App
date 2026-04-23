@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User History</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    /* Styles for the container */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f3f4f6; /* Light gray background */
+      padding: 20px;
+    }
+
+    /* Styles for the hero section */
+    .hero {
+      background-color: #fff; /* White background */
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    /* Styles for the hero title */
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #333; /* Dark gray color */
+      margin-bottom: 20px;
+    }
+
+    /* Styles for user info */
+    .user-info {
+      font-size: 1.1rem;
+      color: #555; /* Gray color */
+      margin-bottom: 20px;
+    }
+
+    /* Styles for table */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    /* Styles for table header */
+    .table th {
+      background-color: #007bff; /* Blue color */
+      color: #fff;
+      padding: 15px;
+      text-align: left;
+    }
+
+    /* Styles for table cells */
+    .table td {
+      padding: 15px;
+      border-bottom: 1px solid #ddd; /* Light gray border */
+    }
+
+    /* Styles for table striped rows */
+    .table tbody tr:nth-child(even) {
+      background-color: #f8f9fa; /* Light gray background for even rows */
+    }
+
+    /* Styles for no login history message */
+    .no-history {
+      font-size: 1.2rem;
+      color: #777; /* Gray color */
+    }
+  </style>
+</head>
+<body>
+  <% include('partials/navbar', { page: 'userHistory' }) %>
+  
+  <div class="container mx-auto">
+    <div class="hero bg-base-200 rounded-lg">
+      <div class="hero-content">
+        <div class="max-w-md">
+          <h1>User History</h1>
+          <% if(session.user) { %>
+            <div class="user-info">
+              <p>Welcome, <%= session.user.userName %></p>
+              <p>Email: <%= session.user.email %></p>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <% if(session.user && session.user.loginHistory && session.user.loginHistory.length > 0) { %>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Column</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% session.user.loginHistory.forEach(entry => { %>
+            <tr>
+              <td>Login Date/Time</td>
+              <td><%= formatDateTime(entry.dateTime) %></td>
+            </tr>
+            <tr>
+              <td>Client Information</td>
+              <td><%= entry.userAgent %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <p class="no-history">No login history available.</p>
+    <% } %>
+  </div>
+
+  <!-- Helper function to format date time -->
+  <script>
+    function formatDateTime(dateTime) {
+      return new Date(dateTime).toLocaleString();
+    }
+  </script>
+</body>
+</html>

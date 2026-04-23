@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    /* Styles for the container */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #fafafa; /* Light gray background */
+    }
+
+    /* Styles for the form */
+    .card {
+      width: 320px;
+      padding: 30px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    }
+
+    /* Styles for the form title */
+    .card h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 30px;
+      color: #333; /* Dark gray color */
+      text-align: center;
+    }
+
+    /* Styles for form controls */
+    .form-control {
+      margin-bottom: 20px;
+    }
+
+    /* Styles for labels */
+    .label-text {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #555; /* Gray color */
+    }
+
+    /* Styles for input fields */
+    .input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      color: #333; /* Dark gray color */
+      background-color: #f8f8f8; /* Light gray background for input fields */
+    }
+
+    /* Styles for the submit button */
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background-color: #a8ff61; /* Coral color */
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease; /* Smooth transition */
+    }
+
+    /* Styles for the submit button on hover */
+    .btn:hover {
+      background-color: #ff4123; /* Darker coral color on hover */
+    }
+  </style>
+</head>
+<body>
+  <% include('partials/navbar', { page: 'login' }) %>
+  
+  <div class="container mx-auto">
+    <div class="max-w-md mx-auto mt-6">
+      <form action="/login" method="POST" class="card shadow-md p-6">
+        <h2 class="text-2xl font-semibold mb-4">Login</h2>
+        <% if(errorMessage) { %>
+          <div class="alert alert-error">
+            <span><%= errorMessage %></span>
+          </div>
+        <% } %>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">User Name</span>
+          </label>
+          <input type="text" name="userName" placeholder="User Name" required class="input">
+        </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Password</span>
+          </label>
+          <input type="password" name="password" placeholder="Password" required class="input">
+        </div>
+        <button type="submit" class="btn btn-primary mt-4">Login</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

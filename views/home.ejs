@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lego Collection</title>
+  <link rel="stylesheet" href="/css/main.css" />
+
+  <style>
+    .card {
+        height: 100%;
+        margin: 10px;
+        background-color: rgba(0, 0, 0, 0.1); ;
+    }
+    
+    .card img {
+        height: 200px;
+        object-fit: cover; 
+    }
+
+  </style>
+</head>
+
+<body tabindex="-1">
+    <%- include('partials/navbar', {page:'/home'}) %>
+
+  <div class="container mx-auto">
+      <div class="hero bg-base-200 rounded-lg p-6">
+          <div class="hero-content text-center ">
+              <div class="max-w-lg">
+                  <h1 class="text-5xl font-bold">Explore Lego Collection</h1>
+      
+                  <p class="py-6">Welcome to our Lego Collection website! Dive into the world of Lego with our extensive collection of sets. Whether you're a collector or just starting out, there's something for everyone here.</p>
+              
+                  <a href="/lego/sets" class="btn btn-primary">Explore Sets</a>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <br>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div>
+
+          <div class="card bg-base-100 shadow-xl">
+              <figure>
+              <img class="w-full" src="https://cdn.rebrickable.com/media/sets/miami-1.jpg" alt="MIAMI-1">
+              </figure>
+              <div class="card-body">
+              <h2 class="card-title">Art Deco Hotel</h2>
+              <p>This set was released in 2010. Inventory were 142 parts, and the theme is LEGO Brand Store.</p>
+                  <div class="card-actions justify-end">
+                          <a href="/lego/sets/MIAMI-1" class="btn btn-primary">View</a>
+                  </div>
+              </div>
+
+          </div>
+
+      </div>
+
+      <div>
+        <div class="card bg-base-100 shadow-xl">
+          <figure>
+          <img class="w-full" src="https://cdn.rebrickable.com/media/sets/microrooster-1.jpg" alt="MICROROOSTER-1">
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">Micro Rooster</h2>
+            <p>This set was released in 2017. Inventory was 8 parts and theme was seasonal.</p>
+            <div class="card-actions justify-end">
+                <a href="/lego/sets/MICROROOSTER-1" class="btn btn-primary">View</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+      <div class="card bg-base-100 shadow-xl">
+          <figure>
+          <img class="w-full " src="https://cdn.rebrickable.com/media/sets/midautumnrabbit-1-1.jpg" alt="MIDAUTUMNRABBIT-1-1">
+          </figure>
+          <div class="card-body">
+          <h2 class="card-title">Mid Autumn Rabbit</h2>
+          <p>This set was realesed in 2019. Inventory was 40 parts and the theme was LEGO Brand Store.</p>
+              <div class="card-actions justify-end">
+                  <a href="/lego/sets/MIDAUTUMNRABBIT-1-1" class="btn btn-primary">View</a>
+              </div>
+          </div>
+      </div>
+
+      </div>
+  </div>
+  
+</body>
+
+</html>

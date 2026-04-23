@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lego Collection</title>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+
+<body tabindex="-1">
+  <%- include('partials/navbar', {page: '/lego/sets' }) %>
+  <div class="container mx-auto">
+    <div class="hero bg-base-200 rounded-lg p-6">
+        <div class="hero-content text-center ">
+            <div class="max-w-2xl">
+                <h1 class="text-5xl font-bold">Explore Our Collection</h1>
+                <p class="py-6">Browse your favourite sets by theme. Click to explore sets by themes: <br><a href="/lego/sets?theme=Monthly Mini Model Build"
+                    class="btn btn-primary">"Monthly Mini Model Build"</a> <a href="/lego/sets?theme=LEGO Brand Store"
+                    class="btn btn-primary">LEGO Brand Store</a> <a href="/lego/sets?theme=Monthly Mini Model Build"
+                    class="btn btn-primary">Monthly Mini Model Build</a> </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="overflow-x-auto overflow-y-hidden">
+
+    <table class="table table-zebra w-full">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Theme</th>
+            <th>Year</th>
+            <th>Number of Parts</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% sets.forEach(set => { %>
+            <tr >
+                <td><div class="avatar"><img src="<%= set.img_url %>" alt="<%= set.name %>" style="width: 8rem; height: 8rem; border-radius: 20%;"></div></td>
+                <td><div class="font-semibold"><%= set.name %></div></td>
+                <td><a href="/lego/sets?theme=<%= set.Theme.name %>" class="btn"><%= set.Theme.name %></a></td>
+                <td><%= set.year %></td>
+                <td><%= set.num_parts %></td>
+                <td><a href="/lego/sets/<%= set.set_num %>" class="btn btn-info">Details</a></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+ </div>
+</body>
+  
+</html>
+

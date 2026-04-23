@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lego Collection</title>
+  <link rel="stylesheet" href="/css/main.css" />
+
+</head>
+
+<body tabindex="-1">
+    <%- include('partials/navbar', {page: '/about'}) %>
+
+  <div class="container mx-auto">
+      <div class="hero bg-base-200 rounded-lg p-6">
+          <div class="hero-content text-center ">
+              <div class="max-w-md">
+                  <h1 class="text-5xl font-bold">About</h1>
+                  <p class="py-6">"Welcome to the Lego Collection website! We're passionate about all things Lego, from classic sets to the latest releases. Dive into our collection and explore the wonderful world of Lego building."</p>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <br>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-8">
+          <div class="p-4">
+              <img src="/mypic.jpg" alt="My image" class="w-full rounded-lg shadow-md">
+          </div>
+
+          <div class="p-4">
+              <h2 class="text-xl font-bold mb-4">About Me</h2>
+              <p class="text-gray-400">"Our website is dedicated to sharing our passion for Lego with fellow enthusiasts. Whether you're a seasoned collector or just starting out, you'll find something to enjoy here. Stay tuned for updates, reviews, and more!"</p>
+              <br>
+              
+          </div>
+      </div>
+  </div>
+</body>
+
+</html>
