@@ -1,10 +1,9 @@
-# Lego Set Management Web Application
+# **Lego App – Full-Stack Web Application Development**
 
 A full-stack web application built with Node.js, Express.js, MongoDB Atlas, and EJS for managing LEGO sets. Users can browse, add, edit, and delete LEGO sets, as well as register and log in securely.
 
 ## 🚀 Live Demo
 https://lego-app-o8uq.onrender.com/
-# **Lego App – Full-Stack Web Application Development**
 
 ### **Executive Summary**
 
